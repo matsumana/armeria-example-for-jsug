@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import com.example.demo.grpc.HelloServiceGrpc.HelloServiceFutureStub;
 
 import com.linecorp.armeria.client.ClientDecoration;
+import com.linecorp.armeria.client.ClientFactory;
 import com.linecorp.armeria.client.ClientOption;
 import com.linecorp.armeria.client.Clients;
 import com.linecorp.armeria.client.WebClient;
 import com.linecorp.armeria.client.logging.LoggingClient;
 import com.linecorp.armeria.client.retrofit2.ArmeriaRetrofit;
 
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
@@ -25,8 +27,18 @@ public class ArmeriaClientConfig {
     private static final Logger logger = LoggerFactory.getLogger(ArmeriaClientConfig.class);
 
     @Bean
-    Retrofit retrofit() {
-        final WebClient webClient = WebClient.of(BASE_URL_PROJECT1);
+    public ClientFactory clientFactory(PrometheusMeterRegistry registry) {
+        // Collect Armeria client metrics
+        return ClientFactory.builder()
+                            .meterRegistry(registry)
+                            .build();
+    }
+
+    @Bean
+    Retrofit retrofit(ClientFactory clientFactory) {
+        final WebClient webClient = WebClient.builder(BASE_URL_PROJECT1)
+                                             .factory(clientFactory)
+                                             .build();
         final ClientDecoration decoration = ClientDecoration.builder()
                                                             .add(LoggingClient.builder()
                                                                               .logger(logger)
@@ -40,8 +52,9 @@ public class ArmeriaClientConfig {
     }
 
     @Bean
-    HelloServiceFutureStub konnichiwaService() {
+    HelloServiceFutureStub konnichiwaService(ClientFactory clientFactory) {
         return Clients.builder(BASE_URL_PROJECT2)
+                      .factory(clientFactory)
                       .decorator(LoggingClient.builder()
                                               .logger(logger)
                                               .newDecorator())
