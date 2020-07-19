@@ -1,0 +1,8 @@
+armeria:
+  ports:
+    - port: 8081
+      protocol: HTTP
+
+logging:
+  level:
+    com.example.demo: DEBUG

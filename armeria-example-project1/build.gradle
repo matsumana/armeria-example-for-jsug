@@ -1,0 +1,15 @@
+project(':armeria-example-project1') {
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+        implementation project(":armeria-example-grpc")
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation "io.grpc:grpc-protobuf"
+        implementation "io.grpc:grpc-stub"
+        implementation 'io.grpc:grpc-netty-shaded'
+
+        implementation 'io.micrometer:micrometer-registry-prometheus'
+    }
+}
