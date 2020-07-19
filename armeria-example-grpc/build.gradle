@@ -1,0 +1,37 @@
+project(':armeria-example-grpc') {
+    apply plugin: 'com.google.protobuf'
+
+    dependencies {
+        implementation "io.grpc:grpc-protobuf"
+        implementation "io.grpc:grpc-stub"
+        compileOnly "javax.annotation:javax.annotation-api"
+    }
+
+    protobuf {
+        generatedFilesBaseDir = "$projectDir/build/generated-sources/grpc"
+        protoc {
+            artifact = "com.google.protobuf:protoc:${v('protobuf')}"
+        }
+
+        plugins {
+            grpc {
+                artifact = "io.grpc:protoc-gen-grpc-java:${v('grpc')}"
+            }
+        }
+
+        generateProtoTasks {
+            all()*.plugins {
+                grpc {}
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs "$projectDir/build/generated-sources/grpc/main/grpc"
+                srcDirs "$projectDir/build/generated-sources/grpc/main/java"
+            }
+        }
+    }
+}

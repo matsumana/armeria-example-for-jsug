@@ -1,25 +1,48 @@
-plugins {
-    id 'org.springframework.boot' version '2.3.1.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'java'
-}
+buildscript {
+    ext.v = { project.property("version.${it}") }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_11
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    repositories {
+        mavenCentral()
     }
-    testImplementation 'io.projectreactor:reactor-test'
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${v('spring-boot')}"
+        classpath "io.spring.gradle:dependency-management-plugin:${v('spring-dependency-management-gradle-plugin')}"
+        classpath "com.google.protobuf:protobuf-gradle-plugin:${v('protobuf-gradle-plugin')}"
+    }
 }
 
-test {
-    useJUnitPlatform()
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+
+    group = 'com.example'
+    version = '0.0.1-SNAPSHOT'
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "com.linecorp.armeria:armeria-bom:${v('armeria')}"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${v('spring-boot')}"
+            mavenBom "io.grpc:grpc-bom:${v('grpc')}"
+        }
+    }
+
+    dependencies {
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        testImplementation 'org.assertj:assertj-core'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
