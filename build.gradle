@@ -34,6 +34,10 @@ subprojects {
             mavenBom "io.grpc:grpc-bom:${v('grpc')}"
         }
         dependencies {
+            // armeria-grpc depends on io.grpc:grpc-protobuf and it depends on x.y-android not x.y-jre
+            // https://mvnrepository.com/artifact/io.grpc/grpc-protobuf/1.30.2
+            dependency "com.google.guava:guava:${v('guava')}"
+
             dependency "com.github.akarnokd:rxjava2-jdk8-interop:${v('rxjava2-jdk8-interop')}"
 //            dependency "com.squareup.retrofit2:converter-jackson:${v('retrofit')}"
             dependency "com.squareup.retrofit2:converter-scalars:${v('retrofit')}"
