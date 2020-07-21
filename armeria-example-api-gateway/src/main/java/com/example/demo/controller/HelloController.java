@@ -12,8 +12,8 @@ import com.linecorp.armeria.common.MediaType;
 import com.linecorp.armeria.server.annotation.Get;
 import com.linecorp.armeria.server.annotation.Param;
 
-import hu.akarnokd.rxjava2.interop.MaybeInterop;
-import io.reactivex.Maybe;
+import hu.akarnokd.rxjava2.interop.SingleInterop;
+import io.reactivex.Single;
 import retrofit2.Retrofit;
 
 @Component
@@ -28,10 +28,10 @@ public class HelloController {
     }
 
     @Get("/hello/:name")
-    public Maybe<HttpResponse> hello(@Param String name) {
+    public Single<HttpResponse> hello(@Param String name) {
         final HelloClient helloClient = retrofit.create(HelloClient.class);
-        return MaybeInterop.fromFuture(helloClient.hello(name))
-                           .doOnError(e -> logger.error("Retrofit HelloClient error", e))
-                           .map(message -> HttpResponse.of(HttpStatus.OK, MediaType.JSON_UTF_8, message));
+        return SingleInterop.fromFuture(helloClient.hello(name))
+                            .doOnError(e -> logger.error("Retrofit HelloClient error", e))
+                            .map(message -> HttpResponse.of(HttpStatus.OK, MediaType.JSON_UTF_8, message));
     }
 }

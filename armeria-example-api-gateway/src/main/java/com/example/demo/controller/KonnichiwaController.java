@@ -16,7 +16,7 @@ import com.linecorp.armeria.common.MediaType;
 import com.linecorp.armeria.server.annotation.Get;
 import com.linecorp.armeria.server.annotation.Param;
 
-import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 @Component
 public class KonnichiwaController {
@@ -30,12 +30,12 @@ public class KonnichiwaController {
     }
 
     @Get("/konnichiwa/:name")
-    public Maybe<HttpResponse> konnichiwa(@Param String name) {
+    public Single<HttpResponse> konnichiwa(@Param String name) {
         final HelloRequest request = HelloRequest.newBuilder()
                                                  .setName(name)
                                                  .build();
         final ListenableFuture<HelloReply> future = konnichiwaService.hello(request);
-        return RxInteropUtil.fromListenableFutureToMaybe(future)
+        return RxInteropUtil.fromListenableFutureToSingle(future)
                             .doOnError(e -> logger.error("gRPC error", e))
                             .map(reply -> HttpResponse.of(HttpStatus.OK, MediaType.JSON_UTF_8,
                                                           reply.getMessage()));
