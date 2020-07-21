@@ -4,14 +4,14 @@ project(':armeria-example-api-gateway') {
     dependencies {
         implementation project(":armeria-example-grpc")
 
-        implementation 'com.linecorp.armeria:armeria-spring-boot2-autoconfigure'
+        implementation 'com.linecorp.armeria:armeria-spring-boot2-starter'
         implementation 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
-        implementation "com.linecorp.armeria:armeria-retrofit2"
         implementation 'com.linecorp.armeria:armeria-grpc'
         implementation 'com.linecorp.armeria:armeria-rxjava2'
+        implementation "com.linecorp.armeria:armeria-retrofit2"
+        implementation 'com.github.akarnokd:rxjava2-jdk8-interop'
 //        implementation "com.squareup.retrofit2:converter-jackson"
         implementation "com.squareup.retrofit2:converter-scalars"
-        implementation 'com.github.akarnokd:rxjava2-jdk8-interop'
         implementation 'io.micrometer:micrometer-registry-prometheus'
 
         testImplementation 'io.projectreactor:reactor-test'
