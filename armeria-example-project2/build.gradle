@@ -4,7 +4,7 @@ project(':armeria-example-project2') {
     dependencies {
         implementation project(":armeria-example-grpc")
 
-        implementation 'com.linecorp.armeria:armeria-spring-boot2-autoconfigure'
+        implementation 'com.linecorp.armeria:armeria-spring-boot2-starter'
         implementation 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
         implementation 'com.linecorp.armeria:armeria-grpc'
         implementation 'io.micrometer:micrometer-registry-prometheus'
