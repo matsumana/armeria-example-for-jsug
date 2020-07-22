@@ -45,8 +45,8 @@ public class ArmeriaClientConfig {
                                                                               .newDecorator())
                                                             .build();
         return ArmeriaRetrofit.builder(webClient)
-//                              .addConverterFactory(JacksonConverterFactory.create())
-                              .addConverterFactory(ScalarsConverterFactory.create())
+//                              .addConverterFactory(JacksonConverterFactory.create())  // for JSON
+                              .addConverterFactory(ScalarsConverterFactory.create())  // for text
                               .option(ClientOption.DECORATION.newValue(decoration))
                               .build();
     }
