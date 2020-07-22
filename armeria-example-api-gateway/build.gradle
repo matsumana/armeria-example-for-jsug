@@ -10,8 +10,8 @@ project(':armeria-example-api-gateway') {
         implementation 'com.linecorp.armeria:armeria-rxjava2'
         implementation "com.linecorp.armeria:armeria-retrofit2"
         implementation 'com.github.akarnokd:rxjava2-jdk8-interop'
-//        implementation "com.squareup.retrofit2:converter-jackson"
-        implementation "com.squareup.retrofit2:converter-scalars"
+//        implementation "com.squareup.retrofit2:converter-jackson"  // for JSON
+        implementation "com.squareup.retrofit2:converter-scalars"  // for text
         implementation 'io.micrometer:micrometer-registry-prometheus'
 
         testImplementation 'io.projectreactor:reactor-test'
