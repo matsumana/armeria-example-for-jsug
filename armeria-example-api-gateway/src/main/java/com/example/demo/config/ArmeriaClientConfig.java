@@ -52,7 +52,7 @@ public class ArmeriaClientConfig {
     }
 
     @Bean
-    HelloServiceFutureStub konnichiwaService(ClientFactory clientFactory) {
+    HelloServiceFutureStub helloServiceFutureStub(ClientFactory clientFactory) {
         return Clients.builder(BASE_URL_PROJECT2)
                       .factory(clientFactory)
                       .decorator(LoggingClient.builder()

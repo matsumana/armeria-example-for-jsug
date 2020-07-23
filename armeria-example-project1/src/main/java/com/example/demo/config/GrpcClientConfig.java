@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.example.demo.grpc.HelloServiceGrpc;
+import com.example.demo.grpc.HelloServiceGrpc.HelloServiceBlockingStub;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -15,7 +16,7 @@ public class GrpcClientConfig {
     private static final int HTTP_PORT_OF_PROJECT2 = 8081;
 
     @Bean
-    HelloServiceGrpc.HelloServiceBlockingStub helloServiceBlockingStub() {
+    HelloServiceBlockingStub helloServiceBlockingStub() {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(HOSTNAME_OF_PROJECT2,
                                                                         HTTP_PORT_OF_PROJECT2)
                                                             .usePlaintext()
