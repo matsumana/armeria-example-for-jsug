@@ -1,4 +1,6 @@
 management:
+  server:
+    port: 18080
   endpoints:
     web:
       exposure:
