@@ -11,10 +11,10 @@ import com.example.demo.grpc.HelloServiceGrpc;
 @RestController
 public class KonnichiwaController {
 
-    private final HelloServiceGrpc.HelloServiceBlockingStub helloServiceBlockingStub;
+    private final HelloServiceGrpc.HelloServiceBlockingStub stub;
 
-    public KonnichiwaController(HelloServiceGrpc.HelloServiceBlockingStub helloServiceBlockingStub) {
-        this.helloServiceBlockingStub = helloServiceBlockingStub;
+    public KonnichiwaController(HelloServiceGrpc.HelloServiceBlockingStub stub) {
+        this.stub = stub;
     }
 
     @GetMapping("/konnichiwa/{name}")
@@ -22,7 +22,7 @@ public class KonnichiwaController {
         final HelloRequest request = HelloRequest.newBuilder()
                                                  .setName(name)
                                                  .build();
-        final HelloReply reply = helloServiceBlockingStub.hello(request);
+        final HelloReply reply = stub.hello(request);
         return reply.getMessage();
     }
 }

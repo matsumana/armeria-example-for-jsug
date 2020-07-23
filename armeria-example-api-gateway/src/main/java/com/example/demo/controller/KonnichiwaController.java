@@ -23,10 +23,10 @@ public class KonnichiwaController {
 
     private static final Logger logger = LoggerFactory.getLogger(KonnichiwaController.class);
 
-    private final HelloServiceFutureStub konnichiwaService;
+    private final HelloServiceFutureStub stub;
 
-    public KonnichiwaController(HelloServiceFutureStub konnichiwaService) {
-        this.konnichiwaService = konnichiwaService;
+    public KonnichiwaController(HelloServiceFutureStub stub) {
+        this.stub = stub;
     }
 
     @Get("/konnichiwa/:name")
@@ -34,7 +34,7 @@ public class KonnichiwaController {
         final HelloRequest request = HelloRequest.newBuilder()
                                                  .setName(name)
                                                  .build();
-        final ListenableFuture<HelloReply> future = konnichiwaService.hello(request);
+        final ListenableFuture<HelloReply> future = stub.hello(request);
         return RxInteropUtil.fromListenableFutureToSingle(future)
                             .doOnError(e -> logger.error("gRPC error", e))
                             .map(reply -> HttpResponse.of(HttpStatus.OK, MediaType.JSON_UTF_8,
