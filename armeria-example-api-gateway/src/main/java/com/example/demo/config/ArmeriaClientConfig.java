@@ -23,7 +23,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ArmeriaClientConfig {
 
     private static final String BASE_URL_PROJECT1 = "http://localhost:8080/";
-    private static final String BASE_URL_PROJECT2 = "gproto+h2c://localhost:8081/";
+    private static final String BASE_URL_PROJECT2 = "gproto+http://localhost:8081/";
     private static final Logger logger = LoggerFactory.getLogger(ArmeriaClientConfig.class);
 
     @Bean

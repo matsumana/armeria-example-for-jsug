@@ -13,7 +13,5 @@ project(':armeria-example-api-gateway') {
 //        implementation "com.squareup.retrofit2:converter-jackson"  // for JSON
         implementation "com.squareup.retrofit2:converter-scalars"  // for text
         implementation 'io.micrometer:micrometer-registry-prometheus'
-
-        testImplementation 'io.projectreactor:reactor-test'
     }
 }
