@@ -1,6 +1,6 @@
-rootProject.name = 'armeria-example'
+rootProject.name = 'armeria-example-for-jsug'
 
 include 'armeria-example-grpc'
-include 'armeria-example-project1'
-include 'armeria-example-project2'
+include 'armeria-example-monolith'
+include 'armeria-example-microservice1'
 include 'armeria-example-api-gateway'

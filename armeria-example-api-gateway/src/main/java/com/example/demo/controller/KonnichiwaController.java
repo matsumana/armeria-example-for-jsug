@@ -29,7 +29,7 @@ public class KonnichiwaController {
         this.stub = stub;
     }
 
-    @Get("/konnichiwa/:name")
+    @Get("/konnichiwa/{name}")
     public Single<HttpResponse> konnichiwa(@Param String name) {
         final HelloRequest request = HelloRequest.newBuilder()
                                                  .setName(name)

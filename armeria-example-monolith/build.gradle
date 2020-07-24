@@ -1,4 +1,4 @@
-project(':armeria-example-project1') {
+project(':armeria-example-monolith') {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
@@ -9,7 +9,6 @@ project(':armeria-example-project1') {
         implementation "io.grpc:grpc-protobuf"
         implementation "io.grpc:grpc-stub"
         implementation 'io.grpc:grpc-netty-shaded'
-
         implementation 'io.micrometer:micrometer-registry-prometheus'
     }
 }
