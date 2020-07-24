@@ -12,9 +12,9 @@ $ ./gradlew --no-daemon clean build
 
 ## Example 1
 
-### How to start the example apps
-
 ![](https://s3-ap-northeast-1.amazonaws.com/static.matsumana.info/blog/armeria-example-for-jsug_example1.png)
+
+### How to start the example apps
 
 ```
 $ java -jar armeria-example-monolith/build/libs/armeria-example-monolith-*.jar
@@ -30,7 +30,7 @@ $ curl localhost:8080/konnichiwa/foo
 こんにちは, foo
 ```
 
-# Example 2
+## Example 2
 
 ![](https://s3-ap-northeast-1.amazonaws.com/static.matsumana.info/blog/armeria-example-for-jsug_example2.png)
 
