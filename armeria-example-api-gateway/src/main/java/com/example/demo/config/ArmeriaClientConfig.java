@@ -22,8 +22,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 @Configuration
 public class ArmeriaClientConfig {
 
-    private static final String BASE_URL_PROJECT1 = "http://localhost:8080/";
-    private static final String BASE_URL_PROJECT2 = "gproto+http://localhost:8081/";
+    private static final String BASE_URL_MONOLITH = "http://localhost:8080/";
+    private static final String BASE_URL_MICROSERVICE1 = "gproto+http://localhost:8081/";
 
     @Bean
     public ClientFactory clientFactory(PrometheusMeterRegistry registry) {
@@ -35,7 +35,7 @@ public class ArmeriaClientConfig {
 
     @Bean
     Retrofit retrofit(ClientFactory clientFactory) {
-        final WebClient webClient = WebClient.builder(BASE_URL_PROJECT1)
+        final WebClient webClient = WebClient.builder(BASE_URL_MONOLITH)
                                              .factory(clientFactory)
                                              .build();
         final ClientDecoration decoration =
@@ -53,7 +53,7 @@ public class ArmeriaClientConfig {
 
     @Bean
     HelloServiceFutureStub helloServiceFutureStub(ClientFactory clientFactory) {
-        return Clients.builder(BASE_URL_PROJECT2)
+        return Clients.builder(BASE_URL_MICROSERVICE1)
                       .factory(clientFactory)
                       .decorator(LoggingClient.builder()
                                               .logger(LoggerFactory.getLogger(HelloServiceFutureStub.class))
