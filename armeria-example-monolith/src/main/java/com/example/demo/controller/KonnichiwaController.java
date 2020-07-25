@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.grpc.Hello.HelloReply;
 import com.example.demo.grpc.Hello.HelloRequest;
-import com.example.demo.grpc.HelloServiceGrpc;
+import com.example.demo.grpc.HelloServiceGrpc.HelloServiceBlockingStub;
 
 @RestController
 public class KonnichiwaController {
 
-    private final HelloServiceGrpc.HelloServiceBlockingStub stub;
+    private final HelloServiceBlockingStub stub;
 
-    public KonnichiwaController(HelloServiceGrpc.HelloServiceBlockingStub stub) {
+    public KonnichiwaController(HelloServiceBlockingStub stub) {
         this.stub = stub;
     }
 

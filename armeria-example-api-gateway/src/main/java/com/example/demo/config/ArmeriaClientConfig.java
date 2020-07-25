@@ -1,11 +1,11 @@
 package com.example.demo.config;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.example.demo.grpc.HelloServiceGrpc.HelloServiceFutureStub;
+import com.example.demo.retrofit.HelloClient;
 
 import com.linecorp.armeria.client.ClientDecoration;
 import com.linecorp.armeria.client.ClientFactory;
@@ -24,7 +24,6 @@ public class ArmeriaClientConfig {
 
     private static final String BASE_URL_PROJECT1 = "http://localhost:8080/";
     private static final String BASE_URL_PROJECT2 = "gproto+http://localhost:8081/";
-    private static final Logger logger = LoggerFactory.getLogger(ArmeriaClientConfig.class);
 
     @Bean
     public ClientFactory clientFactory(PrometheusMeterRegistry registry) {
@@ -39,11 +38,12 @@ public class ArmeriaClientConfig {
         final WebClient webClient = WebClient.builder(BASE_URL_PROJECT1)
                                              .factory(clientFactory)
                                              .build();
-        final ClientDecoration decoration = ClientDecoration.builder()
-                                                            .add(LoggingClient.builder()
-                                                                              .logger(logger)
-                                                                              .newDecorator())
-                                                            .build();
+        final ClientDecoration decoration =
+                ClientDecoration.builder()
+                                .add(LoggingClient.builder()
+                                                  .logger(LoggerFactory.getLogger(HelloClient.class))
+                                                  .newDecorator())
+                                .build();
         return ArmeriaRetrofit.builder(webClient)
 //                              .addConverterFactory(JacksonConverterFactory.create())  // for JSON
                               .addConverterFactory(ScalarsConverterFactory.create())  // for text
@@ -56,7 +56,7 @@ public class ArmeriaClientConfig {
         return Clients.builder(BASE_URL_PROJECT2)
                       .factory(clientFactory)
                       .decorator(LoggingClient.builder()
-                                              .logger(logger)
+                                              .logger(LoggerFactory.getLogger(HelloServiceFutureStub.class))
                                               .newDecorator())
                       .build(HelloServiceFutureStub.class);
     }

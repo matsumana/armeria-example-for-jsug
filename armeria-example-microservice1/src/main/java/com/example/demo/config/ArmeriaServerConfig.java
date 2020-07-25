@@ -26,7 +26,7 @@ public class ArmeriaServerConfig {
                                     .enableUnframedRequests(true)
                                     .build(),
                          LoggingService.builder()
-                                       .logger(LoggerFactory.getLogger(helloController.getClass()))
+                                       .logger(LoggerFactory.getLogger(HelloController.class))
                                        .newDecorator());
     }
 
