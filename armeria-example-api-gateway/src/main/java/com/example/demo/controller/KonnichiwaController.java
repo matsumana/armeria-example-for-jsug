@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import static com.linecorp.armeria.common.HttpStatus.OK;
+import static com.linecorp.armeria.common.MediaType.PLAIN_TEXT_UTF_8;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,8 +14,6 @@ import com.example.demo.util.RxInteropUtil;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import com.linecorp.armeria.common.HttpResponse;
-import com.linecorp.armeria.common.HttpStatus;
-import com.linecorp.armeria.common.MediaType;
 import com.linecorp.armeria.server.annotation.Get;
 import com.linecorp.armeria.server.annotation.Param;
 
@@ -37,7 +38,6 @@ public class KonnichiwaController {
         final ListenableFuture<HelloReply> future = stub.hello(request);
         return RxInteropUtil.fromListenableFutureToSingle(future)
                             .doOnError(e -> logger.error("gRPC error", e))
-                            .map(reply -> HttpResponse.of(HttpStatus.OK, MediaType.JSON_UTF_8,
-                                                          reply.getMessage()));
+                            .map(reply -> HttpResponse.of(OK, PLAIN_TEXT_UTF_8, reply.getMessage()));
     }
 }
