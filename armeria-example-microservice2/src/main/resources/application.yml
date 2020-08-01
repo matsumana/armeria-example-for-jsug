@@ -1,6 +1,6 @@
-management:
-  server:
-    port: 18083
+#management:
+#  server:
+#    port: 18082
 
 logging:
   level:
@@ -8,5 +8,5 @@ logging:
 
 armeria:
   ports:
-    - port: 8083
+    - port: 8082
       protocol: HTTP
