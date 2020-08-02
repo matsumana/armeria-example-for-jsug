@@ -1,12 +1,10 @@
-#management:
-#  server:
-#    port: 18082
+management:
+  server:
+    port: 18082
+
+server:
+  port: 8082
 
 logging:
   level:
     com.example.demo: DEBUG
-
-armeria:
-  ports:
-    - port: 8082
-      protocol: HTTP
