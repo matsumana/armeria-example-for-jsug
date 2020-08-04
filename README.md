@@ -28,6 +28,7 @@ $ java -jar armeria-example-microservice1/build/libs/armeria-example-microservic
 ```
 $ curl localhost:8080/hello/foo
 Hello, foo
+
 $ curl localhost:8080/konnichiwa/foo
 こんにちは, foo
 ```

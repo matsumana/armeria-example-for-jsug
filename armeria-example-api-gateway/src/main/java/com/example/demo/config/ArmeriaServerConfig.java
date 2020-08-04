@@ -11,6 +11,7 @@ import com.example.demo.controller.RootController;
 
 import com.linecorp.armeria.server.logging.LoggingService;
 import com.linecorp.armeria.spring.ArmeriaServerConfigurator;
+import com.linecorp.armeria.spring.DocServiceConfigurator;
 
 @Configuration
 public class ArmeriaServerConfig {
@@ -45,5 +46,20 @@ public class ArmeriaServerConfig {
                                          .logger(LoggerFactory.getLogger(HolaController.class))
                                          .newDecorator())
                 .build(holaController);
+    }
+
+    @Bean
+    public DocServiceConfigurator docServiceConfigurator() {
+        return docServiceBuilder ->
+                docServiceBuilder.examplePaths(HelloController.class,
+                                               "hello",
+                                               "/hello/foo")
+                                 .examplePaths(KonnichiwaController.class,
+                                               "konnichiwa",
+                                               "/konnichiwa/foo")
+                                 .examplePaths(HolaController.class,
+                                               "hola",
+                                               "/hola/foo")
+                                 .build();
     }
 }
