@@ -9,7 +9,7 @@ import com.example.demo.grpc.HelloServiceGrpc.HelloServiceImplBase;
 import io.grpc.stub.StreamObserver;
 
 @Component
-public class HelloController extends HelloServiceImplBase {
+public class KonnichiwaController extends HelloServiceImplBase {
 
     @Override
     public void hello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {

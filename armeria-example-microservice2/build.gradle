@@ -1,0 +1,12 @@
+project(':armeria-example-microservice2') {
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+        implementation project(":armeria-example-grpc")
+
+        implementation 'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'
+        implementation 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
+        implementation 'com.linecorp.armeria:armeria-grpc'
+        implementation 'io.micrometer:micrometer-registry-prometheus'
+    }
+}

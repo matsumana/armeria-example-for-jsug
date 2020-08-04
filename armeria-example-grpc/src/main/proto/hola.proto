@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.example.demo.grpc;
+option java_package = "com.example.demo.grpc";
+
+service HolaService {
+  rpc Hola (HolaRequest) returns (HolaReply) {}
+}
+
+message HolaRequest {
+  string name = 1;
+}
+
+message HolaReply {
+  string message = 1;
+}
