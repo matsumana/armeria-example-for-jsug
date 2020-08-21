@@ -33,10 +33,10 @@ public class ArmeriaServerConfig {
     @Bean
     public DocServiceConfigurator docServiceConfigurator() {
         return docServiceBuilder ->
-                docServiceBuilder.exampleRequestForMethod(HolaServiceGrpc.SERVICE_NAME,
-                                                          "Hola",
-                                                          HolaRequest.newBuilder()
-                                                                     .setName("Armeria")
-                                                                     .build());
+                docServiceBuilder.exampleRequests(HolaServiceGrpc.SERVICE_NAME,
+                                                  "Hola",
+                                                  HolaRequest.newBuilder()
+                                                             .setName("Armeria")
+                                                             .build());
     }
 }
