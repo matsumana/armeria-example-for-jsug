@@ -1,7 +1,6 @@
-# TODO enable
-#management:
-#  server:
-#    port: 18082
+management:
+  server:
+    port: 18082
 
 server:
   port: 8082

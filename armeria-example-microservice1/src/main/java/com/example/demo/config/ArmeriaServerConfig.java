@@ -42,10 +42,10 @@ public class ArmeriaServerConfig {
     @Bean
     public DocServiceConfigurator docServiceConfigurator() {
         return docServiceBuilder ->
-                docServiceBuilder.exampleRequestForMethod(HelloServiceGrpc.SERVICE_NAME,
-                                                          "Hello",
-                                                          HelloRequest.newBuilder()
-                                                                      .setName("Armeria")
-                                                                      .build());
+                docServiceBuilder.exampleRequests(HelloServiceGrpc.SERVICE_NAME,
+                                                  "Hello",
+                                                  HelloRequest.newBuilder()
+                                                              .setName("Armeria")
+                                                              .build());
     }
 }
